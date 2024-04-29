@@ -1,8 +1,11 @@
 # Connect4（四子棋）
 ## execute
+ Use this order in the terminal
  ```
  python3 connect4.py
  ```
+Then you can the GUI
+
 ## GUI
 
  <img src="https://github.com/EdwardLeeee/my-picture/blob/main/start.png" width="260"><img src="https://github.com/EdwardLeeee/my-picture/blob/main/player1win.png" width="250">  
