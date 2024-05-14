@@ -3,7 +3,15 @@ import numpy as np
 import random
 ROW_COUNT = 6
 COLUMN_COUNT = 7
+'''
+mark:
+e 記分公式
+s 計算分數
+m mini-max
 
+o play_game1()
+t play_game2()
+'''
 def create_board():
     return np.zeros((ROW_COUNT, COLUMN_COUNT), dtype=int)
 
@@ -85,6 +93,7 @@ def evaluate_window(window, piece):
 
 def score_position(board, piece):
     score = 0
+
     # Score center column
     center_array = [int(i) for i in list(board[:, COLUMN_COUNT // 2])]#中間column
     center_count = center_array.count(piece)#算有幾顆
@@ -131,16 +140,15 @@ def is_terminal_node(board):
     return winning_move(board, PLAYER_PIECE) or winning_move(board, AI_PIECE) or len(get_valid_locations(board)) == 0
 
 # depth就是遞迴深度,就是往後看幾手
-#depth = 0 就是推演到最後的盤面
 def minimax(board, depth, alpha, beta, maximizingPlayer):
     valid_locations = get_valid_locations(board)
     is_terminal = is_terminal_node(board)
     if depth == 0 or is_terminal:#遞迴中止條件
         if is_terminal:
             if winning_move(board, AI_PIECE):
-                return (None, 9999)
+                return (None, 999 )
             elif winning_move(board, PLAYER_PIECE):
-                return (None, -9999)
+                return (None, -999)
             else:  # Game is over, no more valid moves
                 return (None, 0)# Tie
         else:  # Depth is zero
@@ -205,7 +213,7 @@ def play_game1():
                     game_over = True
 
                 if not game_over:
-                    col, minimax_score = minimax(board, 4, -math.inf, math.inf, True)
+                    col, minimax_score = minimax(board, 6, -math.inf, math.inf, True)
 
                     if is_valid_location(board, col):
                         row = get_next_open_row(board, col)
@@ -222,7 +230,7 @@ def play_game1():
                             label.place(relx=0.5, rely=0.5, anchor='center')
                             game_over = True
 
-         #處理平手
+            #處理平手
             if is_tie(board):
                 window = tk.Tk()
                 window.geometry("400x300")
@@ -239,11 +247,11 @@ def play_game1():
 
     window.resizable(False,False)
     canvas = tk.Canvas(window, width=COLUMN_COUNT * 200, height=ROW_COUNT * 200)
-    canvas.grid(row=0, columnspan=COLUMN_COUNT)  # 改為使用 grid 佈局
+    canvas.grid(row=0, columnspan=COLUMN_COUNT)  # 使用 grid 佈局
 
     for col in range(COLUMN_COUNT):
         button = tk.Button(window, text=f"Column {col+1}", command=lambda c=col: button_click(c),bg="lightskyblue")
-        button.grid(row=1, column=col)  # 改為使用 grid 佈局
+        button.grid(row=1, column=col)  # 使用 grid 佈局
     draw_board(canvas, board)
 
 def play_game2():
@@ -277,7 +285,7 @@ def play_game2():
                 draw_board(canvas, board)
                 piece = (piece + 1) % 2
 
-         #處理平手
+            #處理平手
             if is_tie(board):
                 window = tk.Tk()
                 window.geometry("400x300")
@@ -317,12 +325,6 @@ play_button.pack(expand=True)  # 將按鈕放置在視窗的中間
 play2_button = tk.Button(window, text="雙人對戰", command=play_game2)
 play2_button.config(height=5, width=20,bg='deepskyblue', fg='white',font=('Arial',20))  # 設定按鈕的大小
 play2_button.pack(expand=True)  # 將按鈕放置在視窗的中間
-
-exit_button = tk.Button(window, text="離開", command=exit_game)
-exit_button.config(height=5, width=20 ,bg='dodgerblue', fg='white',font=('Arial',20))  # 設定按鈕的大小
-exit_button.pack(expand=True)  # 將按鈕放置在視窗的中間
-window.mainloop()
-
 
 exit_button = tk.Button(window, text="離開", command=exit_game)
 exit_button.config(height=5, width=20 ,bg='dodgerblue', fg='white',font=('Arial',20))  # 設定按鈕的大小
