@@ -3,15 +3,7 @@ import numpy as np
 import random
 ROW_COUNT = 6
 COLUMN_COUNT = 7
-'''
-mark:
-e 記分公式
-s 計算分數
-m mini-max
 
-o play_game1()
-t play_game2()
-'''
 def create_board():
     return np.zeros((ROW_COUNT, COLUMN_COUNT), dtype=int)
 
