@@ -222,16 +222,16 @@ def play_game1():
                             label.place(relx=0.5, rely=0.5, anchor='center')
                             game_over = True
 
-            #處理平手
-            if is_tie(board):
-                window = tk.Tk()
-                window.geometry("400x300")
-                window.title("Game Over")
-                window.config(bg='lightskyblue')  # 設定視窗的背景顏色為淺灰色
-                window.resizable(False,False)
-                label = tk.Label(window, text="It's a Tie!!", font=('Arial', 20),justify='center', bg='lightskyblue',fg='black')
-                label.place(relx=0.5, rely=0.5, anchor='center')
-                game_over = True
+                #處理平手
+                if is_tie(board):
+                    window = tk.Tk()
+                    window.geometry("400x300")
+                    window.title("Game Over")
+                    window.config(bg='lightskyblue')  # 設定視窗的背景顏色為淺灰色
+                    window.resizable(False,False)
+                    label = tk.Label(window, text="It's a Tie!!", font=('Arial', 20),justify='center', bg='lightskyblue',fg='black')
+                    label.place(relx=0.5, rely=0.5, anchor='center')
+                    game_over = True
 
     window = tk.Tk()
     window.title("Connect4")
